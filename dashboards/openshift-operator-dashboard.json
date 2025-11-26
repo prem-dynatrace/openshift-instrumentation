@@ -1,0 +1,464 @@
+{
+  "metadata": {
+    "configurationVersions": [7],
+    "clusterVersion": "1.282.0"
+  },
+  "dashboardMetadata": {
+    "name": "OpenShift Cluster Operators Health",
+    "shared": true,
+    "owner": "Dynatrace Admin",
+    "dashboardFilter": {
+      "timeframe": "-2h",
+      "managementZone": null
+    },
+    "preset": true,
+    "tilesNameSize": "small"
+  },
+  "tiles": [
+    {
+      "name": "🎯 Critical Operators Status",
+      "tileType": "DATA_EXPLORER",
+      "configured": true,
+      "bounds": {
+        "top": 0,
+        "left": 0,
+        "width": 608,
+        "height": 304
+      },
+      "tileFilter": {},
+      "isAutoRefreshDisabled": false,
+      "customName": "Critical Operators Health Matrix",
+      "queries": [
+        {
+          "id": "A",
+          "metric": "cluster_operator_conditions",
+          "spaceAggregation": "AUTO",
+          "timeAggregation": "DEFAULT",
+          "splitBy": [
+            "name",
+            "condition"
+          ],
+          "filterBy": {
+            "filterOperator": "AND",
+            "nestedFilters": [
+              {
+                "filter": "name",
+                "filterOperator": "IN",
+                "filterValues": [
+                  "authentication",
+                  "kube-apiserver",
+                  "etcd",
+                  "dns",
+                  "ingress",
+                  "network",
+                  "kube-controller-manager",
+                  "kube-scheduler",
+                  "openshift-apiserver"
+                ]
+              }
+            ]
+          },
+          "enabled": true
+        }
+      ],
+      "visualConfig": {
+        "type": "TABLE",
+        "global": {},
+        "rules": [
+          {
+            "matcher": "A:",
+            "properties": {
+              "seriesType": "LINE"
+            },
+            "seriesOverrides": []
+          }
+        ],
+        "axes": {
+          "xAxis": {
+            "visible": true
+          },
+          "yAxes": []
+        },
+        "thresholds": [
+          {
+            "axisTarget": "LEFT",
+            "columnId": "Available",
+            "rules": [
+              {
+                "color": "#7dc540",
+                "value": 1
+              },
+              {
+                "color": "#ef651f",
+                "value": 0
+              }
+            ],
+            "visible": true
+          },
+          {
+            "axisTarget": "LEFT",
+            "columnId": "Degraded",
+            "rules": [
+              {
+                "color": "#7dc540",
+                "value": 0
+              },
+              {
+                "color": "#dc172a",
+                "value": 1
+              }
+            ],
+            "visible": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "⚠️ Degraded Operators Count",
+      "tileType": "DATA_EXPLORER",
+      "configured": true,
+      "bounds": {
+        "top": 0,
+        "left": 608,
+        "width": 304,
+        "height": 152
+      },
+      "tileFilter": {},
+      "isAutoRefreshDisabled": false,
+      "customName": "Degraded Operators",
+      "queries": [
+        {
+          "id": "A",
+          "metric": "cluster_operator_conditions",
+          "spaceAggregation": "AUTO",
+          "timeAggregation": "DEFAULT",
+          "splitBy": [],
+          "filterBy": {
+            "filterOperator": "AND",
+            "nestedFilters": [
+              {
+                "filter": "condition",
+                "filterOperator": "EQUALS",
+                "filterValue": "Degraded"
+              }
+            ]
+          },
+          "enabled": true
+        }
+      ],
+      "visualConfig": {
+        "type": "SINGLE_VALUE",
+        "global": {},
+        "rules": [
+          {
+            "matcher": "A:",
+            "properties": {
+              "color": "DEFAULT",
+              "seriesType": "LINE"
+            },
+            "seriesOverrides": []
+          }
+        ],
+        "thresholds": [
+          {
+            "axisTarget": "LEFT",
+            "rules": [
+              {
+                "color": "#7dc540",
+                "value": 0
+              },
+              {
+                "color": "#f5d30f",
+                "value": 1
+              },
+              {
+                "color": "#dc172a",
+                "value": 2
+              }
+            ],
+            "visible": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "⏳ Operators in Progressing State",
+      "tileType": "DATA_EXPLORER",
+      "configured": true,
+      "bounds": {
+        "top": 152,
+        "left": 608,
+        "width": 304,
+        "height": 152
+      },
+      "tileFilter": {},
+      "isAutoRefreshDisabled": false,
+      "customName": "Progressing Operators",
+      "queries": [
+        {
+          "id": "A",
+          "metric": "cluster_operator_conditions",
+          "spaceAggregation": "AUTO",
+          "timeAggregation": "DEFAULT",
+          "splitBy": [],
+          "filterBy": {
+            "filterOperator": "AND",
+            "nestedFilters": [
+              {
+                "filter": "condition",
+                "filterOperator": "EQUALS",
+                "filterValue": "Progressing"
+              }
+            ]
+          },
+          "enabled": true
+        }
+      ],
+      "visualConfig": {
+        "type": "SINGLE_VALUE",
+        "global": {},
+        "rules": [
+          {
+            "matcher": "A:",
+            "properties": {
+              "color": "DEFAULT",
+              "seriesType": "LINE"
+            },
+            "seriesOverrides": []
+          }
+        ],
+        "thresholds": [
+          {
+            "axisTarget": "LEFT",
+            "rules": [
+              {
+                "color": "#7dc540",
+                "value": 0
+              },
+              {
+                "color": "#f5d30f",
+                "value": 1
+              }
+            ],
+            "visible": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "📊 All Operators Availability Trend (24h)",
+      "tileType": "DATA_EXPLORER",
+      "configured": true,
+      "bounds": {
+        "top": 304,
+        "left": 0,
+        "width": 912,
+        "height": 304
+      },
+      "tileFilter": {},
+      "isAutoRefreshDisabled": false,
+      "customName": "Operator Availability Over Time",
+      "queries": [
+        {
+          "id": "A",
+          "metric": "cluster_operator_conditions",
+          "spaceAggregation": "AUTO",
+          "timeAggregation": "DEFAULT",
+          "splitBy": [
+            "name"
+          ],
+          "filterBy": {
+            "filterOperator": "AND",
+            "nestedFilters": [
+              {
+                "filter": "condition",
+                "filterOperator": "EQUALS",
+                "filterValue": "Available"
+              }
+            ]
+          },
+          "enabled": true
+        }
+      ],
+      "visualConfig": {
+        "type": "GRAPH_CHART",
+        "global": {},
+        "rules": [
+          {
+            "matcher": "A:",
+            "properties": {
+              "color": "DEFAULT",
+              "seriesType": "LINE"
+            },
+            "seriesOverrides": []
+          }
+        ],
+        "axes": {
+          "xAxis": {
+            "visible": true
+          },
+          "yAxes": [
+            {
+              "visible": true,
+              "min": 0,
+              "max": 1,
+              "position": "LEFT"
+            }
+          ]
+        },
+        "thresholds": [
+          {
+            "axisTarget": "LEFT",
+            "rules": [
+              {
+                "color": "#dc172a",
+                "value": 0
+              },
+              {
+                "color": "#7dc540",
+                "value": 1
+              }
+            ],
+            "visible": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "🔴 Currently Degraded Operators",
+      "tileType": "DATA_EXPLORER",
+      "configured": true,
+      "bounds": {
+        "top": 608,
+        "left": 0,
+        "width": 456,
+        "height": 304
+      },
+      "tileFilter": {},
+      "isAutoRefreshDisabled": false,
+      "customName": "Degraded Operators List",
+      "queries": [
+        {
+          "id": "A",
+          "metric": "cluster_operator_conditions",
+          "spaceAggregation": "AUTO",
+          "timeAggregation": "DEFAULT",
+          "splitBy": [
+            "name"
+          ],
+          "filterBy": {
+            "filterOperator": "AND",
+            "nestedFilters": [
+              {
+                "filter": "condition",
+                "filterOperator": "EQUALS",
+                "filterValue": "Degraded"
+              }
+            ]
+          },
+          "enabled": true
+        }
+      ],
+      "visualConfig": {
+        "type": "TOP_LIST",
+        "global": {},
+        "rules": [
+          {
+            "matcher": "A:",
+            "properties": {
+              "color": "DEFAULT",
+              "seriesType": "LINE"
+            },
+            "seriesOverrides": []
+          }
+        ],
+        "thresholds": [
+          {
+            "axisTarget": "LEFT",
+            "rules": [
+              {
+                "color": "#dc172a",
+                "value": 1
+              }
+            ],
+            "visible": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "🔶 Currently Progressing Operators",
+      "tileType": "DATA_EXPLORER",
+      "configured": true,
+      "bounds": {
+        "top": 608,
+        "left": 456,
+        "width": 456,
+        "height": 304
+      },
+      "tileFilter": {},
+      "isAutoRefreshDisabled": false,
+      "customName": "Progressing Operators List",
+      "queries": [
+        {
+          "id": "A",
+          "metric": "cluster_operator_conditions",
+          "spaceAggregation": "AUTO",
+          "timeAggregation": "DEFAULT",
+          "splitBy": [
+            "name"
+          ],
+          "filterBy": {
+            "filterOperator": "AND",
+            "nestedFilters": [
+              {
+                "filter": "condition",
+                "filterOperator": "EQUALS",
+                "filterValue": "Progressing"
+              }
+            ]
+          },
+          "enabled": true
+        }
+      ],
+      "visualConfig": {
+        "type": "TOP_LIST",
+        "global": {},
+        "rules": [
+          {
+            "matcher": "A:",
+            "properties": {
+              "color": "DEFAULT",
+              "seriesType": "LINE"
+            },
+            "seriesOverrides": []
+          }
+        ],
+        "thresholds": [
+          {
+            "axisTarget": "LEFT",
+            "rules": [
+              {
+                "color": "#f5d30f",
+                "value": 1
+              }
+            ],
+            "visible": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "📝 Markdown - Instructions",
+      "tileType": "MARKDOWN",
+      "configured": true,
+      "bounds": {
+        "top": 0,
+        "left": 912,
+        "width": 304,
+        "height": 608
+      },
+      "markdown": "## 🏥 OpenShift Operators Health\n\n### Dashboard Overview\nThis dashboard monitors the health of OpenShift cluster operators.\n\n### Status Indicators\n\n**Available** (Green = 1)\n- Operator is functioning normally\n\n**Degraded** (Red = 1)\n- ⚠️ Operator has errors\n- **Action Required**\n\n**Progressing** (Yellow = 1)\n- Operator is updating\n- Monitor for extended duration\n\n### Critical Operators\n- `authentication`\n- `kube-apiserver`\n- `etcd`\n- `dns`\n- `ingress`\n- `network`\n\n### Investigation Steps\n\n1. **Identify degraded operator** from top tiles\n2. **Check operator pods**:\n   ```\n   oc get pods -n openshift-<operator>\n   ```\n3. **Review operator logs**:\n   ```\n   oc logs -n openshift-<operator> <pod-name>\n   ```\n4. **Check operator status**:\n   ```\n   oc describe clusteroperator <name>\n   ```\n5. **Review related Dynatrace events** and Davis AI analysis\n\n### Alert Thresholds\n\n- **Critical**: Any degraded operator\n- **Warning**: Operator progressing > 30 min\n- **Info**: Operator availability < 100%\n\n### Resources\n\n- [Runbook](link-to-runbook)\n- [Escalation](link-to-escalation)\n- [OpenShift Docs](https://docs.openshift.com)\n\n---\n\n**Last Updated**: 2024-11\n**Owner**: Platform Team\n**Refresh**: 1 minute"
+    }
+  ]
+}
