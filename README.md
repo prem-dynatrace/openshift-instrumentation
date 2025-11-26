@@ -1,5 +1,8 @@
 # OpenShift Cluster Operator Monitoring with Dynatrace
 
+> [!CAUTION]
+> **Disclaimer**: This repository is NOT an official Dynatrace product or officially supported by Dynatrace. This is a community-contributed solution provided as-is for educational and informational purposes only. The author and Dynatrace assume no responsibility or liability for any issues, damages, or losses that may arise from the use of this repository or its contents. Users implement this solution at their own risk. For official Dynatrace support and documentation, please visit [https://support.dynatrace.com](https://support.dynatrace.com) and [https://docs.dynatrace.com](https://docs.dynatrace.com).
+
 Comprehensive solution for monitoring OpenShift cluster operator health using Dynatrace's Kubernetes Prometheus integration.
 
 ## Overview
@@ -237,9 +240,22 @@ Contributions are welcome! Please:
 Lead Customer Success Engineer, Dynatrace  
 Singapore
 
-## License
+## License and Disclaimer
 
-This project is provided as-is for Dynatrace customers and partners.
+**License**: This project is provided under the MIT License (see LICENSE file).
+
+**Disclaimer of Warranty**: This repository and its contents are provided "AS IS" and "AS AVAILABLE" without warranty of any kind, either express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement.
+
+**Limitation of Liability**: In no event shall the author, contributors, or Dynatrace be liable for any claim, damages, or other liability arising from the use of this repository or its contents.
+
+**Not Official Dynatrace Product**: This is an unofficial, community-contributed solution. It is not officially supported, endorsed, approved, or maintained by Dynatrace. For official Dynatrace products and support:
+- Official Documentation: [https://docs.dynatrace.com](https://docs.dynatrace.com)
+- Official Support: [https://support.dynatrace.com](https://support.dynatrace.com)
+- Official Community: [https://community.dynatrace.com](https://community.dynatrace.com)
+
+**Testing and Validation**: Users are strongly advised to thoroughly test this solution in non-production environments before deploying to production systems. Always follow your organization's change management and security policies.
+
+**No Support Obligation**: The author and Dynatrace have no obligation to provide support, updates, enhancements, or modifications to this repository.
 
 ## Version History
 

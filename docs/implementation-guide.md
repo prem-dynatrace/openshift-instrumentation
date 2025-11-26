@@ -1,6 +1,8 @@
 # OpenShift Cluster Operator Monitoring - Implementation Guide
 ## Using Dynatrace Operator with Prometheus Integration
 
+> **⚠️ DISCLAIMER**: This is NOT an official Dynatrace solution. This community-contributed guide is provided "AS IS" without warranty. Users implement at their own risk. The author and Dynatrace assume no liability for issues arising from use of this guide. Always test thoroughly in non-production environments first. For official Dynatrace support, visit [support.dynatrace.com](https://support.dynatrace.com).
+
 ---
 
 ## Overview
